@@ -2,7 +2,7 @@
 //  MemeTableViewController.swift
 //  MemeMe 1.0
 //
-//  Created by mac on 11/03/2020.
+//  Created by sodiqOladeni on 11/03/2020.
 //  Copyright © 2020 NotZero Technologies. All rights reserved.
 //
 
@@ -15,11 +15,12 @@ class MemeTableViewController: UITableViewController {
     
     private var memes:[Meme]!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         memes = (UIApplication.shared.delegate as! AppDelegate).memes
         tableView.reloadData()
+        print("\((UIApplication.shared.delegate as! AppDelegate).memes)")
     }
 
     // MARK: - Table view data source

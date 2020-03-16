@@ -78,7 +78,6 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="collectionViewFlowLayout" destination="o3a-Dd-wMp" id="gAu-34-LIb"/>
                         <segue destination="pX7-Ii-6Nm" kind="show" identifier="to_memeDetailController" id="GzZ-9X-3O1"/>
                     </connections>
                 </collectionViewController>
@@ -86,10 +85,10 @@
             </objects>
             <point key="canvasLocation" x="463.768115942029" y="184.82142857142856"/>
         </scene>
-        <!--Meme Table View Controller-->
+        <!--Sent List-->
         <scene sceneID="ka7-cv-eQs">
             <objects>
-                <tableViewController id="cl0-IQ-E6N" customClass="MemeTableViewController" customModule="MemeMe_1_0" sceneMemberID="viewController">
+                <tableViewController title="Sent List" id="cl0-IQ-E6N" customClass="MemeTableViewController" customModule="MemeMe_1_0" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5eR-Vg-4uK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,10 +123,10 @@
             </objects>
             <point key="canvasLocation" x="464" y="-492"/>
         </scene>
-        <!--Meme Detail View Controller-->
+        <!--Meme Detail-->
         <scene sceneID="Ibf-on-Kf1">
             <objects>
-                <viewController id="pX7-Ii-6Nm" customClass="MemeDetailViewController" customModule="MemeMe_1_0" sceneMemberID="viewController">
+                <viewController title="Meme Detail" id="pX7-Ii-6Nm" customClass="MemeDetailViewController" customModule="MemeMe_1_0" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0XB-mI-anh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -154,10 +153,10 @@
             </objects>
             <point key="canvasLocation" x="1986" y="-113"/>
         </scene>
-        <!--Meme Editor View Controller-->
+        <!--Meme Editor-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MemeEditorViewController" customModule="MemeMe_1_0" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Meme Editor" id="BYZ-38-t0r" customClass="MemeEditorViewController" customModule="MemeMe_2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

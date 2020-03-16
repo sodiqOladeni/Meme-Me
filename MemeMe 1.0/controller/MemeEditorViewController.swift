@@ -2,13 +2,14 @@
 //  ViewController.swift
 //  MemeMe 1.0
 //
-//  Created by Sodiq on 09/03/2020.
+//  Created by sodiqOladeni on 09/03/2020.
 //  Copyright © 2020 NotZero Technologies. All rights reserved.
 //
 
 import UIKit
 
-class MemeEditorViewController: UIViewController, UITabBarDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UITabBarDelegate,
+UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var topShareBarItem: UIBarButtonItem!
     @IBOutlet weak var topMemeText: UITextField!
@@ -25,10 +26,23 @@ class MemeEditorViewController: UIViewController, UITabBarDelegate, UIImagePicke
         
         uiTabBarForCameraAndGallery.delegate = self
         imagePicker.delegate = self
+        topMemeText.delegate = self
         bottomMemeText.delegate = self
         
         setupTextField(tf: topMemeText, text: "TOP")
         setupTextField(tf: bottomMemeText, text: "BOTTOM")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        openCameraBarItem.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        subscribeToKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unsubscribeFromKeyboardNotifications()
     }
     
     
@@ -58,11 +72,15 @@ class MemeEditorViewController: UIViewController, UITabBarDelegate, UIImagePicke
     }
     
     @objc func keyboardWillShow(_ notification:Notification) {
-        view.frame.origin.y -= getKeyboardHeight(notification)
+        if bottomMemeText.isFirstResponder {
+            view.frame.origin.y -= getKeyboardHeight(notification)
+        }
     }
     
     @objc func keyboardWillHide(_ notification:Notification) {
-        view.frame.origin.y = 0
+        if bottomMemeText.isFirstResponder {
+            view.frame.origin.y = 0
+        }
     }
     
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
@@ -82,7 +100,7 @@ class MemeEditorViewController: UIViewController, UITabBarDelegate, UIImagePicke
                 self.dismiss(animated: true, completion: nil)
             }
         }
-        
+    
         present(activityController, animated: true, completion: nil)
     }
     
@@ -112,23 +130,23 @@ class MemeEditorViewController: UIViewController, UITabBarDelegate, UIImagePicke
         tf.defaultTextAttributes = [
             NSAttributedString.Key.foregroundColor : UIColor.white,
             NSAttributedString.Key.strokeColor : UIColor.black,
-            NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+            NSAttributedString.Key.font : UIFont(name: "HelveticaNeue-CondensedBlack", size: 30)!,
             NSAttributedString.Key.strokeWidth : -4.0,
         ]
         tf.textColor = UIColor.white
         tf.tintColor = UIColor.white
         tf.textAlignment = .center
         tf.text = text
-        tf.delegate = self
     }
     
-    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        subscribeToKeyboardNotifications()
-        return true
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if (textField.text=="TOP" || textField.text=="BOTTOM"){
+            textField.text=""
+        }
     }
     
-    func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        unsubscribeFromKeyboardNotifications()
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
         return true
     }
     
